@@ -86,3 +86,5 @@ This means, in the worst case, this algorithm can take N step if **n** is Nth fi
 
   for(i = n; i > -1; i /= 2)---doesnt terminate
 --------------------------------------------------------------------------------------------------------------------------------------------
+
+changed  
