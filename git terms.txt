@@ -104,3 +104,20 @@ Now, go back to GitHub in your browser window and paste the key you copied into 
 Step 2.5 Testing your key
 
 Follow the GitHub directions for testing your SSH connection. Make sure the fingerprint output in the terminal matches one of the four GitHub’s public fingerprints. (Don’t forget to omit the $ when you copy and paste the code!).
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+warning: adding embedded git repository: odin-tries
+hint: You've added another git repository inside your current repository.
+hint: Clones of the outer repository will not contain the contents of
+hint: the embedded repository and will not know how to obtain it.
+hint: If you meant to add a submodule, use:
+hint:
+hint:   git submodule add <url> odin-tries
+hint:
+hint: If you added this path by mistake, you can remove it from the
+hint: index with:
+hint:
+hint:   git rm --cached odin-tries
+hint:
+hint: See "git help submodule" for more information.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
