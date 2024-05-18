@@ -39,70 +39,44 @@ While there is not necessarily a default "upstream" or "downstream" for Git proj
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 SETTING UP AND GENERATING N LINKING OF SSH TO GITHUB
 The commands below will configure Git. Be sure to enter your own information inside the quotes (but include the quotation marks)!
-
 git config --global user.name "Your Name"
 git config --global user.email "yourname@example.com"
-
 If you opted to use the private GitHub email address, the second command will look something like this:
-
 git config --global user.email "123456789+odin@users.noreply.github.com" # Remember to use your own private GitHub email here.
-
 GitHub recently changed the default branch on new repositories from master to main. Change the default branch for Git using this command:
-
 git config --global init.defaultBranch main
-
 To enable colorful output with git, type
-
 git config --global color.ui auto
-
 You’ll also likely want to set your default branch reconciliation behavior to merging. You’ll learn what all those terms mean later in the curriculum, but for now just know that we suggest running the below command as part of the Git setup process when doing The Odin Project.
-
 git config --global pull.rebase false
-
 To verify that things are working properly, enter these commands and verify whether the output matches your name and email address.
-
 git config --get user.name
 git config --get user.email
 
 macOS Users: Run these two commands to tell Git to ignore .DS_Store files, which are automatically created when you use Finder to look into a folder. .DS_Store files are invisible to the user and hold custom attributes or metadata (like thumbnails) for the folder, and if you don’t configure Git to ignore them, pesky .DS_Store files will show up in your commits. Remember to copy and paste each of these commands into your terminal.
-
 echo .DS_Store >> ~/.gitignore_global
 git config --global core.excludesfile ~/.gitignore_global
 
 Step 2.3: Create an SSH key
-
 An SSH key is a cryptographically secure identifier. It’s like a really long password used to identify your machine. GitHub uses SSH keys to allow you to upload to your repository without having to type in your username and password every time.
-
 First, we need to see if you have an Ed25519 algorithm SSH key already installed. Type this into the terminal and check the output with the information below:
-
 ls ~/.ssh/id_ed25519.pub
-
 If a message appears in the console containing the text “No such file or directory”, then you do not yet have an Ed25519 SSH key, and you will need to create one. If no such message has appeared in the console output, you can proceed to step 2.4.
-
 To create a new SSH key, run the following command inside your terminal.
-
 ssh-keygen -t ed25519
-
     When it prompts you for a location to save the generated key, just push Enter.
     Next, it will ask you for a password; enter one if you wish, but it’s not required.
 
 Step 2.4: Link your SSH key with GitHub
-
 Now, you need to tell GitHub what your SSH key is so that you can push your code without typing in a password every time.
-
 First, you’ll navigate to where GitHub receives our SSH key. Log into GitHub and click on your profile picture in the top right corner. Then, click on Settings in the drop-down menu.
-
 Next, on the left-hand side, click SSH and GPG keys. Then, click the green button in the top right corner that says New SSH Key. Name your key something that is descriptive enough for you to remember what device this SSH key came from, for example linux-ubuntu. Leave this window open while you do the next steps.
-
 Now you need to copy your public SSH key. To do this, we’re going to use a command called cat to read the file to the console. (Note that the .pub file extension is important in this case.)
-
 cat ~/.ssh/id_ed25519.pub
-
 Highlight and copy the entire output from the command. If you followed the instructions above, the output will likely begin with ssh-ed25519 and end with your username@hostname.
-
 Now, go back to GitHub in your browser window and paste the key you copied into the key field. Keep the key type as Authentication Key and then, click Add SSH key. You’re done! You’ve successfully added your SSH key!
-Step 2.5 Testing your key
 
+Step 2.5 Testing your key
 Follow the GitHub directions for testing your SSH connection. Make sure the fingerprint output in the terminal matches one of the four GitHub’s public fingerprints. (Don’t forget to omit the $ when you copy and paste the code!).
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 warning: adding embedded git repository: odin-tries
@@ -110,14 +84,10 @@ hint: You've added another git repository inside your current repository.
 hint: Clones of the outer repository will not contain the contents of
 hint: the embedded repository and will not know how to obtain it.
 hint: If you meant to add a submodule, use:
-hint:
 hint:   git submodule add <url> odin-tries
-hint:
 hint: If you added this path by mistake, you can remove it from the
 hint: index with:
-hint:
 hint:   git rm --cached odin-tries
-hint:
 hint: See "git help submodule" for more information.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -142,3 +112,41 @@ git push -u origin main
 git remote add origin https://github.com/ShinichiShi/xxx.git
 git branch -M main
 git push -u origin main
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+.GITIGNORE FILES:
+The .gitignore file is a text file that tells Git which files or folders to ignore in a project.
+
+A local .gitignore file is usually placed in the root directory of a project. You can also create a global .gitignore file and any entries in that file will be ignored in all of your Git repositories.
+To create a local .gitignore file, create a text file and name it .gitignore (remember to include the . at the beginning). Then edit this file as needed. Each new line should list an additional file or folder that you want Git to ignore.
+The entries in this file can also follow a matching pattern.
+* is used as a wildcard match
+/ is used to ignore pathnames relative to the .gitignore file
+# is used to add comments to a .gitignore file
+
+This is an example of what the .gitignore file could look like:
+# Ignore Mac system files
+.DS_store
+# Ignore node_modules folder
+node_modules
+# Ignore all text files
+*.txt
+# Ignore files related to API keys
+.env
+# Ignore SASS config files
+.sass-cache
+
+To add or change your global .gitignore file, run the following command:
+git config --global core.excludesfile ~/.gitignore_global
+This will create the file ~/.gitignore_global. Now you can edit that file the same way as a local .gitignore file. All of your Git repositories will ignore the files and folders listed in the global .gitignore file.
+How to Untrack Files Previously Committed from New Gitignore
+To untrack a single file, ie stop tracking the file but not delete it from the system use:
+git rm --cached filename
+To untrack every file in .gitignore:
+First commit any outstanding code changes, and then run:
+git rm -r --cached
+This removes any changed files from the index(staging area), then run:
+git add .
+Commit it:
+git commit -m ".gitignore is now working"
+To undo git rm --cached filename, use git add filename
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
