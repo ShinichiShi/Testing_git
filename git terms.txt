@@ -128,16 +128,17 @@ Click on the + icon in the top right corner and select "New repository".
 Fill in the repository name (it can be the same as reponame or different), description, and other settings.
 Click on "Create repository".
 Add the Remote Repository:
-
-Copy the URL of the newly created GitHub repository (it should look something like https://github.com/yourusername/reponame.git).
-Navigate to your local repository:
-cd reponame
-Add the remote URL to your local repository:
-git remote add origin https://github.com/yourusername/reponame.git
-
-Push Local Repository to GitHub:
-Commit any changes in your local repository (if you haven't already):
-git add .
-git commit -m "Initial commit"
-Push the changes to the GitHub repository:
-git push -u origin master
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Get started by creating a new file or uploading an existing file. We recommend every repository include a README, LICENSE, and .gitignore.
+-->>or create a new repository on the command line
+echo "# xxx" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/ShinichiShi/xxx.git
+git push -u origin main
+-->>or push an existing repository from the command line
+git remote add origin https://github.com/ShinichiShi/xxx.git
+git branch -M main
+git push -u origin main
